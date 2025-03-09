@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FurnishFind - Recommendations</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      background: #161b22;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .room-container {
+      margin-bottom: 30px;
+    }
+    .room-container img {
+      width: 50%;
+      border-radius: 8px;
+      border: 3px solid #007acc;
+      display: block;
+      margin: 0 auto;
+    }
+    .recommendations {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: nowrap; 
+    }
+    .recommendation {
+      flex: 0 0 30%;
+      margin: 10px;
+    }
+    .recommendation img {
+      width: 100%;
+      border-radius: 8px;
+      border: 3px solid #007acc;
+    }
+    .btn-custom {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      margin-top: 20px;
+    }
+    .btn-custom:hover {
+      background-color: #005f99;
+    }
+  </style>
+</head>
+<body>
+  <div class="container room-container">
+    <h1>Your Room Image</h1>
+    <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Your Room Image" />
+  </div>
+  <div class="container">
+    <h2>Top 3 Furniture Recommendations</h2>
+    <div class="recommendations">
+      {% for rec in results %}
+      <div class="recommendation">
+        <img src="{{ rec.image_url }}" alt="Furniture Image" />
+        <p>
+          <a href="{{ rec.buy_link }}" class="btn btn-custom" target="_blank">Buy Now</a>
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+    <a class="btn btn-custom btn-lg" href="{{ url_for('index') }}">Upload Another Room Image</a>
+  </div>
+</body>
+</html>
